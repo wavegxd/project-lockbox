@@ -1,0 +1,18 @@
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
+type Lockbox {
+  id: ID! @unique
+  branch: String!
+  box: String!
+  time: String!
+  date: String!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}

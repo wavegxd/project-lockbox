@@ -1,0 +1,68 @@
+type Query {
+  me: User!
+  users(query: String, first: Int, skip: Int, after: String): [User!]!
+  lockboxes(query: String, first: Int, skip: Int, after: String): [Lockbox!]!
+}
+
+type Mutation {
+  createUser(data: CreateUserInput!): AuthPayload!
+  deleteUser(id: ID!): User!
+  updateUser(data: UpdateUserInput!): User!
+  login(data: LoginUserInput!): AuthPayload!
+  createLockbox(data: CreateLockboxInput): Lockbox!
+  deleteLockbox(id: ID!): Lockbox!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+}
+
+input CreateLockboxInput {
+  branch: String!
+  box: String!
+  time: String!
+  date: String!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String
+  password: String!
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Lockbox {
+  id: ID!
+  branch: String!
+  box: String!
+  time: String!
+  date: String!
+  updatedAt: String!
+  createdAt: String!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
