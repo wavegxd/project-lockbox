@@ -36,6 +36,7 @@ input UpdateUserInput {
 }
 
 input CreateLockboxInput {
+  amount: Float!
   branch: String!
   box: String!
   time: String!
@@ -54,6 +55,7 @@ type User {
 type Lockbox {
   id: ID!
   branch: String!
+  amount: Float!
   box: String!
   time: String!
   date: String!

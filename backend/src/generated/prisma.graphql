@@ -1,5 +1,5 @@
 # source: http://localhost:4466/project-lockbox/dev
-# timestamp: Thu Feb 28 2019 17:11:57 GMT-0800 (PST)
+# timestamp: Thu Mar 07 2019 12:48:44 GMT-0800 (PST)
 
 type AggregateLockbox {
   count: Int!
@@ -21,6 +21,7 @@ scalar Json
 
 type Lockbox implements Node {
   id: ID!
+  amount: Float!
   branch: String!
   box: String!
   time: String!
@@ -40,6 +41,7 @@ type LockboxConnection {
 }
 
 input LockboxCreateInput {
+  amount: Float!
   branch: String!
   box: String!
   time: String!
@@ -58,6 +60,8 @@ type LockboxEdge {
 enum LockboxOrderByInput {
   id_ASC
   id_DESC
+  amount_ASC
+  amount_DESC
   branch_ASC
   branch_DESC
   box_ASC
@@ -74,6 +78,7 @@ enum LockboxOrderByInput {
 
 type LockboxPreviousValues {
   id: ID!
+  amount: Float!
   branch: String!
   box: String!
   time: String!
@@ -122,6 +127,7 @@ input LockboxSubscriptionWhereInput {
 }
 
 input LockboxUpdateInput {
+  amount: Float
   branch: String
   box: String
   time: String
@@ -129,6 +135,7 @@ input LockboxUpdateInput {
 }
 
 input LockboxUpdateManyMutationInput {
+  amount: Float
   branch: String
   box: String
   time: String
@@ -184,6 +191,28 @@ input LockboxWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  amount: Float
+
+  """All values that are not equal to given value."""
+  amount_not: Float
+
+  """All values that are contained in given list."""
+  amount_in: [Float!]
+
+  """All values that are not contained in given list."""
+  amount_not_in: [Float!]
+
+  """All values less than the given value."""
+  amount_lt: Float
+
+  """All values less than or equal the given value."""
+  amount_lte: Float
+
+  """All values greater than the given value."""
+  amount_gt: Float
+
+  """All values greater than or equal the given value."""
+  amount_gte: Float
   branch: String
 
   """All values that are not equal to given value."""

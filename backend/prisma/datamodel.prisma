@@ -9,6 +9,7 @@ type User {
 
 type Lockbox {
   id: ID! @unique
+  amount: Float!
   branch: String!
   box: String!
   time: String!
