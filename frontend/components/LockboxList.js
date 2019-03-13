@@ -14,7 +14,9 @@ const LOCKBOX_QUERY = gql`
 const LockboxUl = styled.ul`
   display: grid;
   grid-gap: 4rem;
-  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  border: black;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  box-shadow: 5px 10px 0 rgba(248, 243, 240);
 `;
 
 class LockboxList extends Component {
@@ -31,8 +33,8 @@ class LockboxList extends Component {
               <LockboxUl>
                 {lockboxes.map(lockbox => (
                   <div>
-                    <p>{lockbox.id}</p>
-                    <p>{lockbox.box}</p>
+                    <p>ID: {lockbox.id}</p>
+                    <p>BOX: {lockbox.box}</p>
                   </div>
                 ))}
               </LockboxUl>

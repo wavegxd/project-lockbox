@@ -35,9 +35,11 @@ class BoxSubmit extends Component {
     amount: 0
   };
   saveToState = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    if (e.target.name === 'amount') {
+      this.setState({ [e.target.name]: parseFloat(e.target.value) });
+    } else this.setState({ [e.target.name]: e.target.value });
   };
-  hadnleFormReset = () => {
+  handleFormReset = () => {
     this.setState(() => this.state);
   };
   render() {
@@ -50,6 +52,7 @@ class BoxSubmit extends Component {
                 method="post"
                 onSubmit={async e => {
                   e.preventDefault();
+                  console.log(this.state);
                   await createLockbox();
                   this.setState({
                     branch: '',
@@ -59,6 +62,7 @@ class BoxSubmit extends Component {
                     amount: 0
                   });
                 }}
+                onReset={this.handleFormReset}
               >
                 <label htmlFor="branch">
                   Branch
@@ -91,6 +95,7 @@ class BoxSubmit extends Component {
                   Amount
                   <input
                     type="number"
+                    step={0.1}
                     name="amount"
                     placeholder="Amount"
                     onChange={this.saveToState}
