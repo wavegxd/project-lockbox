@@ -84,6 +84,35 @@ const Mutation = {
     });
 
     return lockbox;
+  },
+  async createLockboxTransaction(parent, args, { prisma }, info) {
+    console.log(args);
+    const lockbox = await prisma.query.lockbox({
+      where: {
+        id: args.data.lockbox
+      }
+    });
+    if (args.transaction === 'DEPOSIT') {
+      return prisma.mutation.updateLockbox({
+        where: {
+          id: lockbox.id
+        },
+        data: {
+          amount: lockbox.amount + args.data.amount
+        }
+      });
+    }
+    if (args.data.amount > lockbox.amount) {
+      throw new Error(`Insufficient funds`);
+    }
+    return prisma.mutation.updateLockbox({
+      where: {
+        id: lockbox.id
+      },
+      data: {
+        amount: lockbox.amount - args.data.amount
+      }
+    });
   }
 };
 

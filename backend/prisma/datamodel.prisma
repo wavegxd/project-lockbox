@@ -14,6 +14,14 @@ type Lockbox {
   box: String!
   time: String!
   date: String!
+  transactions: [LockboxTransaction!]!
+    @relation(name: "TransactionToLockbox", onDelete: CASCADE)
   updatedAt: DateTime!
   createdAt: DateTime!
+}
+
+type LockboxTransaction {
+  id: ID! @unique
+  amount: Float!
+  lockbox: Lockbox! @relation(name: "TransactionToLockbox", onDelete: SET_NULL)
 }

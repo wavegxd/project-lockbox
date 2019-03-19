@@ -1,7 +1,11 @@
 # source: http://localhost:4466/project-lockbox/dev
-# timestamp: Thu Mar 07 2019 12:48:44 GMT-0800 (PST)
+# timestamp: Mon Mar 18 2019 20:04:25 GMT-0700 (PDT)
 
 type AggregateLockbox {
+  count: Int!
+}
+
+type AggregateLockboxTransaction {
   count: Int!
 }
 
@@ -26,6 +30,7 @@ type Lockbox implements Node {
   box: String!
   time: String!
   date: String!
+  transactions(where: LockboxTransactionWhereInput, orderBy: LockboxTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LockboxTransaction!]
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -41,6 +46,20 @@ type LockboxConnection {
 }
 
 input LockboxCreateInput {
+  amount: Float!
+  branch: String!
+  box: String!
+  time: String!
+  date: String!
+  transactions: LockboxTransactionCreateManyWithoutLockboxInput
+}
+
+input LockboxCreateOneWithoutTransactionsInput {
+  create: LockboxCreateWithoutTransactionsInput
+  connect: LockboxWhereUniqueInput
+}
+
+input LockboxCreateWithoutTransactionsInput {
   amount: Float!
   branch: String!
   box: String!
@@ -126,12 +145,303 @@ input LockboxSubscriptionWhereInput {
   node: LockboxWhereInput
 }
 
+type LockboxTransaction implements Node {
+  id: ID!
+  amount: Float!
+  lockbox: Lockbox!
+}
+
+"""A connection to a list of items."""
+type LockboxTransactionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LockboxTransactionEdge]!
+  aggregate: AggregateLockboxTransaction!
+}
+
+input LockboxTransactionCreateInput {
+  amount: Float!
+  lockbox: LockboxCreateOneWithoutTransactionsInput!
+}
+
+input LockboxTransactionCreateManyWithoutLockboxInput {
+  create: [LockboxTransactionCreateWithoutLockboxInput!]
+  connect: [LockboxTransactionWhereUniqueInput!]
+}
+
+input LockboxTransactionCreateWithoutLockboxInput {
+  amount: Float!
+}
+
+"""An edge in a connection."""
+type LockboxTransactionEdge {
+  """The item at the end of the edge."""
+  node: LockboxTransaction!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LockboxTransactionOrderByInput {
+  id_ASC
+  id_DESC
+  amount_ASC
+  amount_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type LockboxTransactionPreviousValues {
+  id: ID!
+  amount: Float!
+}
+
+input LockboxTransactionScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LockboxTransactionScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LockboxTransactionScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LockboxTransactionScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  amount: Float
+
+  """All values that are not equal to given value."""
+  amount_not: Float
+
+  """All values that are contained in given list."""
+  amount_in: [Float!]
+
+  """All values that are not contained in given list."""
+  amount_not_in: [Float!]
+
+  """All values less than the given value."""
+  amount_lt: Float
+
+  """All values less than or equal the given value."""
+  amount_lte: Float
+
+  """All values greater than the given value."""
+  amount_gt: Float
+
+  """All values greater than or equal the given value."""
+  amount_gte: Float
+}
+
+type LockboxTransactionSubscriptionPayload {
+  mutation: MutationType!
+  node: LockboxTransaction
+  updatedFields: [String!]
+  previousValues: LockboxTransactionPreviousValues
+}
+
+input LockboxTransactionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LockboxTransactionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LockboxTransactionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LockboxTransactionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LockboxTransactionWhereInput
+}
+
+input LockboxTransactionUpdateInput {
+  amount: Float
+  lockbox: LockboxUpdateOneRequiredWithoutTransactionsInput
+}
+
+input LockboxTransactionUpdateManyDataInput {
+  amount: Float
+}
+
+input LockboxTransactionUpdateManyMutationInput {
+  amount: Float
+}
+
+input LockboxTransactionUpdateManyWithoutLockboxInput {
+  create: [LockboxTransactionCreateWithoutLockboxInput!]
+  connect: [LockboxTransactionWhereUniqueInput!]
+  set: [LockboxTransactionWhereUniqueInput!]
+  disconnect: [LockboxTransactionWhereUniqueInput!]
+  delete: [LockboxTransactionWhereUniqueInput!]
+  update: [LockboxTransactionUpdateWithWhereUniqueWithoutLockboxInput!]
+  updateMany: [LockboxTransactionUpdateManyWithWhereNestedInput!]
+  deleteMany: [LockboxTransactionScalarWhereInput!]
+  upsert: [LockboxTransactionUpsertWithWhereUniqueWithoutLockboxInput!]
+}
+
+input LockboxTransactionUpdateManyWithWhereNestedInput {
+  where: LockboxTransactionScalarWhereInput!
+  data: LockboxTransactionUpdateManyDataInput!
+}
+
+input LockboxTransactionUpdateWithoutLockboxDataInput {
+  amount: Float
+}
+
+input LockboxTransactionUpdateWithWhereUniqueWithoutLockboxInput {
+  where: LockboxTransactionWhereUniqueInput!
+  data: LockboxTransactionUpdateWithoutLockboxDataInput!
+}
+
+input LockboxTransactionUpsertWithWhereUniqueWithoutLockboxInput {
+  where: LockboxTransactionWhereUniqueInput!
+  update: LockboxTransactionUpdateWithoutLockboxDataInput!
+  create: LockboxTransactionCreateWithoutLockboxInput!
+}
+
+input LockboxTransactionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LockboxTransactionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LockboxTransactionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LockboxTransactionWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  amount: Float
+
+  """All values that are not equal to given value."""
+  amount_not: Float
+
+  """All values that are contained in given list."""
+  amount_in: [Float!]
+
+  """All values that are not contained in given list."""
+  amount_not_in: [Float!]
+
+  """All values less than the given value."""
+  amount_lt: Float
+
+  """All values less than or equal the given value."""
+  amount_lte: Float
+
+  """All values greater than the given value."""
+  amount_gt: Float
+
+  """All values greater than or equal the given value."""
+  amount_gte: Float
+  lockbox: LockboxWhereInput
+}
+
+input LockboxTransactionWhereUniqueInput {
+  id: ID
+}
+
 input LockboxUpdateInput {
   amount: Float
   branch: String
   box: String
   time: String
   date: String
+  transactions: LockboxTransactionUpdateManyWithoutLockboxInput
 }
 
 input LockboxUpdateManyMutationInput {
@@ -140,6 +450,26 @@ input LockboxUpdateManyMutationInput {
   box: String
   time: String
   date: String
+}
+
+input LockboxUpdateOneRequiredWithoutTransactionsInput {
+  create: LockboxCreateWithoutTransactionsInput
+  connect: LockboxWhereUniqueInput
+  update: LockboxUpdateWithoutTransactionsDataInput
+  upsert: LockboxUpsertWithoutTransactionsInput
+}
+
+input LockboxUpdateWithoutTransactionsDataInput {
+  amount: Float
+  branch: String
+  box: String
+  time: String
+  date: String
+}
+
+input LockboxUpsertWithoutTransactionsInput {
+  update: LockboxUpdateWithoutTransactionsDataInput!
+  create: LockboxCreateWithoutTransactionsInput!
 }
 
 input LockboxWhereInput {
@@ -417,6 +747,9 @@ input LockboxWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  transactions_every: LockboxTransactionWhereInput
+  transactions_some: LockboxTransactionWhereInput
+  transactions_none: LockboxTransactionWhereInput
 }
 
 input LockboxWhereUniqueInput {
@@ -432,16 +765,22 @@ scalar Long
 type Mutation {
   createUser(data: UserCreateInput!): User!
   createLockbox(data: LockboxCreateInput!): Lockbox!
+  createLockboxTransaction(data: LockboxTransactionCreateInput!): LockboxTransaction!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateLockbox(data: LockboxUpdateInput!, where: LockboxWhereUniqueInput!): Lockbox
+  updateLockboxTransaction(data: LockboxTransactionUpdateInput!, where: LockboxTransactionWhereUniqueInput!): LockboxTransaction
   deleteUser(where: UserWhereUniqueInput!): User
   deleteLockbox(where: LockboxWhereUniqueInput!): Lockbox
+  deleteLockboxTransaction(where: LockboxTransactionWhereUniqueInput!): LockboxTransaction
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertLockbox(where: LockboxWhereUniqueInput!, create: LockboxCreateInput!, update: LockboxUpdateInput!): Lockbox!
+  upsertLockboxTransaction(where: LockboxTransactionWhereUniqueInput!, create: LockboxTransactionCreateInput!, update: LockboxTransactionUpdateInput!): LockboxTransaction!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyLockboxes(data: LockboxUpdateManyMutationInput!, where: LockboxWhereInput): BatchPayload!
+  updateManyLockboxTransactions(data: LockboxTransactionUpdateManyMutationInput!, where: LockboxTransactionWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyLockboxes(where: LockboxWhereInput): BatchPayload!
+  deleteManyLockboxTransactions(where: LockboxTransactionWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
@@ -479,10 +818,13 @@ enum PrismaDatabase {
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   lockboxes(where: LockboxWhereInput, orderBy: LockboxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Lockbox]!
+  lockboxTransactions(where: LockboxTransactionWhereInput, orderBy: LockboxTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LockboxTransaction]!
   user(where: UserWhereUniqueInput!): User
   lockbox(where: LockboxWhereUniqueInput!): Lockbox
+  lockboxTransaction(where: LockboxTransactionWhereUniqueInput!): LockboxTransaction
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   lockboxesConnection(where: LockboxWhereInput, orderBy: LockboxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LockboxConnection!
+  lockboxTransactionsConnection(where: LockboxTransactionWhereInput, orderBy: LockboxTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LockboxTransactionConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -494,6 +836,7 @@ type Query {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   lockbox(where: LockboxSubscriptionWhereInput): LockboxSubscriptionPayload
+  lockboxTransaction(where: LockboxTransactionSubscriptionWhereInput): LockboxTransactionSubscriptionPayload
 }
 
 type User implements Node {

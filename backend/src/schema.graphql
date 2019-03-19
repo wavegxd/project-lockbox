@@ -10,7 +10,12 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
   login(data: LoginUserInput!): AuthPayload!
   createLockbox(data: CreateLockboxInput): Lockbox!
+  updateLockbox(data: UpdateLockboxInput): Lockbox!
   deleteLockbox(id: ID!): Lockbox!
+  createLockboxTransaction(
+    transaction: TransactionType!
+    data: TransactionInput!
+  ): Lockbox!
 }
 
 input LoginUserInput {
@@ -43,6 +48,14 @@ input CreateLockboxInput {
   date: String!
 }
 
+input UpdateLockboxInput {
+  amount: Float
+  branch: String
+  box: String
+  time: String
+  date: String
+}
+
 type User {
   id: ID!
   name: String!
@@ -59,12 +72,23 @@ type Lockbox {
   box: String!
   time: String!
   date: String!
+  transactions: [LockboxTransaction!]!
   updatedAt: String!
   createdAt: String!
 }
 
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
+type LockboxTransaction {
+  id: ID!
+  amount: Float!
+  lockbox: Lockbox!
+}
+
+input TransactionInput {
+  lockbox: ID!
+  amount: Float!
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAW
 }
