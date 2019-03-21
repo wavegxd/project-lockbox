@@ -105,12 +105,19 @@ const Mutation = {
     if (args.data.amount > lockbox.amount) {
       throw new Error(`Insufficient funds`);
     }
-    return prisma.mutation.updateLockbox({
+
+    await prisma.mutation.updateLockbox({
       where: {
         id: lockbox.id
       },
       data: {
         amount: lockbox.amount - args.data.amount
+      }
+    });
+
+    return prisma.mutation.createLockboxTransaction({
+      data: {
+        ...args.data
       }
     });
   }

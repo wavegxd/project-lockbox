@@ -1,5 +1,5 @@
 # source: http://localhost:4466/project-lockbox/dev
-# timestamp: Mon Mar 18 2019 20:04:25 GMT-0700 (PDT)
+# timestamp: Wed Mar 20 2019 20:08:22 GMT-0700 (PDT)
 
 type AggregateLockbox {
   count: Int!
@@ -149,6 +149,8 @@ type LockboxTransaction implements Node {
   id: ID!
   amount: Float!
   lockbox: Lockbox!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -198,6 +200,8 @@ enum LockboxTransactionOrderByInput {
 type LockboxTransactionPreviousValues {
   id: ID!
   amount: Float!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 input LockboxTransactionScalarWhereInput {
@@ -271,6 +275,50 @@ input LockboxTransactionScalarWhereInput {
 
   """All values greater than or equal the given value."""
   amount_gte: Float
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
 }
 
 type LockboxTransactionSubscriptionPayload {
@@ -428,6 +476,50 @@ input LockboxTransactionWhereInput {
 
   """All values greater than or equal the given value."""
   amount_gte: Float
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   lockbox: LockboxWhereInput
 }
 

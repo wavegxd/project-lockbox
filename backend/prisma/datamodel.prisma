@@ -24,4 +24,6 @@ type LockboxTransaction {
   id: ID! @unique
   amount: Float!
   lockbox: Lockbox! @relation(name: "TransactionToLockbox", onDelete: SET_NULL)
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }

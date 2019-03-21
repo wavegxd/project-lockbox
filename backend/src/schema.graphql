@@ -2,6 +2,12 @@ type Query {
   me: User!
   users(query: String, first: Int, skip: Int, after: String): [User!]!
   lockboxes(query: String, first: Int, skip: Int, after: String): [Lockbox!]!
+  transactions(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+  ): [LockboxTransaction!]!
 }
 
 type Mutation {
@@ -81,6 +87,8 @@ type LockboxTransaction {
   id: ID!
   amount: Float!
   lockbox: Lockbox!
+  updatedAt: String!
+  createdAt: String!
 }
 
 input TransactionInput {
