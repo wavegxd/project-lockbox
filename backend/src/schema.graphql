@@ -21,7 +21,7 @@ type Mutation {
   createLockboxTransaction(
     transaction: TransactionType!
     data: TransactionInput!
-  ): Lockbox!
+  ): LockboxTransaction!
 }
 
 input LoginUserInput {

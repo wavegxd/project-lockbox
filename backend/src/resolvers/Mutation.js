@@ -93,7 +93,7 @@ const Mutation = {
       }
     });
     if (args.transaction === 'DEPOSIT') {
-      return prisma.mutation.updateLockbox({
+      await prisma.mutation.updateLockbox({
         where: {
           id: lockbox.id
         },
@@ -101,23 +101,28 @@ const Mutation = {
           amount: lockbox.amount + args.data.amount
         }
       });
-    }
-    if (args.data.amount > lockbox.amount) {
-      throw new Error(`Insufficient funds`);
-    }
-
-    await prisma.mutation.updateLockbox({
-      where: {
-        id: lockbox.id
-      },
-      data: {
-        amount: lockbox.amount - args.data.amount
+    } else {
+      if (args.data.amount > lockbox.amount) {
+        throw new Error(`Insufficient funds`);
       }
-    });
 
+      await prisma.mutation.updateLockbox({
+        where: {
+          id: lockbox.id
+        },
+        data: {
+          amount: lockbox.amount - args.data.amount
+        }
+      });
+    }
     return prisma.mutation.createLockboxTransaction({
       data: {
-        ...args.data
+        amount: args.data.amount,
+        lockbox: {
+          connect: {
+            id: lockbox.id
+          }
+        }
       }
     });
   }
