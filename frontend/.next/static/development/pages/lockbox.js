@@ -20078,7 +20078,7 @@ var Lockbox = function Lockbox() {
 
 /***/ }),
 
-/***/ 3:
+/***/ 1:
 /*!**************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Flockbox&absolutePagePath=%2FUsers%2FRoa%2FDesktop%2Fproject-lockbox%2Ffrontend%2Fpages%2Flockbox.js ***!
   \**************************************************************************************************************************************************/
@@ -20101,5 +20101,5 @@ module.exports = dll_3681e7fd756237ce51c6;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]));;
+},[[1,"static/runtime/webpack.js"]]]));;
 //# sourceMappingURL=lockbox.js.map

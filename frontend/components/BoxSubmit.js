@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -26,98 +26,103 @@ const CREATE_LOCKBOX_MUTATION = gql`
   }
 `;
 
-class BoxSubmit extends Component {
-  state = {
+function BoxSubmit() {
+  const [boxForm, setBoxForm] = useState({
     branch: '',
     box: '',
     time: '',
-    data: '',
+    date: '',
     amount: 0
-  };
-  saveToState = e => {
+  });
+  const updateBoxForm = (e) => {
     if (e.target.name === 'amount') {
-      this.setState({ [e.target.name]: parseFloat(e.target.value) });
-    } else this.setState({ [e.target.name]: e.target.value });
+      setBoxForm({
+        ...boxForm,
+        [e.target.name]: parseFloat(e.target.value)
+      });
+    } else {
+      setBoxForm({
+        ...boxForm,
+        [e.target.name]: e.target.value
+      });
+    }
   };
-  handleFormReset = () => {
-    this.setState(() => this.state);
-  };
-  render() {
-    return (
-      <Mutation mutation={CREATE_LOCKBOX_MUTATION} variables={this.state}>
-        {(createLockbox, { error, loading }) => {
-          return (
-            <div>
-              <form
-                method="post"
-                onSubmit={async e => {
-                  e.preventDefault();
-                  console.log(this.state);
-                  await createLockbox();
-                  this.setState({
-                    branch: '',
-                    box: '',
-                    time: '',
-                    data: '',
-                    amount: 0
-                  });
-                }}
-                onReset={this.handleFormReset}
-              >
-                <label htmlFor="branch">
-                  Branch
-                  <input
-                    type="text"
-                    name="branch"
-                    placeholder="Branch"
-                    onChange={this.saveToState}
-                  />
-                </label>
-                <label htmlFor="box">
-                  Box
-                  <input
-                    type="text"
-                    name="box"
-                    placeholder="Box"
-                    onChange={this.saveToState}
-                  />
-                </label>
-                <label htmlFor="time">
-                  Time
-                  <input
-                    type="text"
-                    name="time"
-                    placeholder="Time"
-                    onChange={this.saveToState}
-                  />
-                </label>
-                <label htmlFor="amount">
-                  Amount
-                  <input
-                    type="number"
-                    step={0.1}
-                    name="amount"
-                    placeholder="Amount"
-                    onChange={this.saveToState}
-                  />
-                </label>
-                <label htmlFor="date">
-                  Date
-                  <input
-                    type="text"
-                    name="date"
-                    placeholder="Date"
-                    onChange={this.saveToState}
-                  />
-                </label>
-                <button type="submit">Submit</button>
-              </form>
-            </div>
-          );
-        }}
-      </Mutation>
-    );
-  }
+  return (
+    <Mutation mutation={CREATE_LOCKBOX_MUTATION} variables={boxForm}>
+      {(createLockbox, { error, loading }) => (
+        <div>
+          <form
+            method="post"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              console.log(boxForm);
+              await createLockbox();
+              setBoxForm({
+                branch: '',
+                box: '',
+                time: '',
+                date: '',
+                amount: 0
+              });
+            }}
+          >
+            <label htmlFor="branch">
+              Branch
+              <input
+                type="text"
+                name="branch"
+                placeholder="Branch"
+                value={boxForm.branch}
+                onChange={updateBoxForm}
+              />
+            </label>
+            <label htmlFor="box">
+              Box
+              <input
+                type="text"
+                name="box"
+                placeholder="Box"
+                value={boxForm.box}
+                onChange={updateBoxForm}
+              />
+            </label>
+            <label htmlFor="time">
+              Time
+              <input
+                type="text"
+                name="time"
+                placeholder="Time"
+                value={boxForm.time}
+                onChange={updateBoxForm}
+              />
+            </label>
+            <label htmlFor="amount">
+              Amount
+              <input
+                type="number"
+                step={0.1}
+                name="amount"
+                placeholder="Amount"
+                value={boxForm.amount}
+                onChange={updateBoxForm}
+              />
+            </label>
+            <label htmlFor="date">
+              Date
+              <input
+                type="text"
+                name="date"
+                placeholder="Date"
+                value={boxForm.date}
+                onChange={updateBoxForm}
+              />
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      )}
+    </Mutation>
+  );
 }
 
 export default BoxSubmit;
