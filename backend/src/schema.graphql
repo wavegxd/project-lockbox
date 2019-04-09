@@ -18,10 +18,7 @@ type Mutation {
   createLockbox(data: CreateLockboxInput): Lockbox!
   updateLockbox(data: UpdateLockboxInput): Lockbox!
   deleteLockbox(id: ID!): Lockbox!
-  createLockboxTransaction(
-    transaction: TransactionType!
-    data: TransactionInput!
-  ): LockboxTransaction!
+  createLockboxTransaction(data: TransactionInput!): LockboxTransaction!
 }
 
 input LoginUserInput {
@@ -89,11 +86,13 @@ type LockboxTransaction {
   lockbox: Lockbox!
   updatedAt: String!
   createdAt: String!
+  transactionType: String!
 }
 
 input TransactionInput {
   lockbox: ID!
   amount: Float!
+  transactionType: [TransactionType]!
 }
 
 enum TransactionType {

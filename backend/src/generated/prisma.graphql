@@ -1,5 +1,5 @@
 # source: http://localhost:4466/project-lockbox/dev
-# timestamp: Wed Mar 20 2019 20:08:22 GMT-0700 (PDT)
+# timestamp: Mon Apr 08 2019 13:08:25 GMT-0700 (PDT)
 
 type AggregateLockbox {
   count: Int!
@@ -19,9 +19,6 @@ type BatchPayload {
 }
 
 scalar DateTime
-
-"""Raw JSON value"""
-scalar Json
 
 type Lockbox implements Node {
   id: ID!
@@ -149,6 +146,7 @@ type LockboxTransaction implements Node {
   id: ID!
   amount: Float!
   lockbox: Lockbox!
+  transactionType: String!
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -165,6 +163,7 @@ type LockboxTransactionConnection {
 
 input LockboxTransactionCreateInput {
   amount: Float!
+  transactionType: String!
   lockbox: LockboxCreateOneWithoutTransactionsInput!
 }
 
@@ -175,6 +174,7 @@ input LockboxTransactionCreateManyWithoutLockboxInput {
 
 input LockboxTransactionCreateWithoutLockboxInput {
   amount: Float!
+  transactionType: String!
 }
 
 """An edge in a connection."""
@@ -191,6 +191,8 @@ enum LockboxTransactionOrderByInput {
   id_DESC
   amount_ASC
   amount_DESC
+  transactionType_ASC
+  transactionType_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -200,6 +202,7 @@ enum LockboxTransactionOrderByInput {
 type LockboxTransactionPreviousValues {
   id: ID!
   amount: Float!
+  transactionType: String!
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -275,6 +278,46 @@ input LockboxTransactionScalarWhereInput {
 
   """All values greater than or equal the given value."""
   amount_gte: Float
+  transactionType: String
+
+  """All values that are not equal to given value."""
+  transactionType_not: String
+
+  """All values that are contained in given list."""
+  transactionType_in: [String!]
+
+  """All values that are not contained in given list."""
+  transactionType_not_in: [String!]
+
+  """All values less than the given value."""
+  transactionType_lt: String
+
+  """All values less than or equal the given value."""
+  transactionType_lte: String
+
+  """All values greater than the given value."""
+  transactionType_gt: String
+
+  """All values greater than or equal the given value."""
+  transactionType_gte: String
+
+  """All values containing the given string."""
+  transactionType_contains: String
+
+  """All values not containing the given string."""
+  transactionType_not_contains: String
+
+  """All values starting with the given string."""
+  transactionType_starts_with: String
+
+  """All values not starting with the given string."""
+  transactionType_not_starts_with: String
+
+  """All values ending with the given string."""
+  transactionType_ends_with: String
+
+  """All values not ending with the given string."""
+  transactionType_not_ends_with: String
   updatedAt: DateTime
 
   """All values that are not equal to given value."""
@@ -362,15 +405,18 @@ input LockboxTransactionSubscriptionWhereInput {
 
 input LockboxTransactionUpdateInput {
   amount: Float
+  transactionType: String
   lockbox: LockboxUpdateOneRequiredWithoutTransactionsInput
 }
 
 input LockboxTransactionUpdateManyDataInput {
   amount: Float
+  transactionType: String
 }
 
 input LockboxTransactionUpdateManyMutationInput {
   amount: Float
+  transactionType: String
 }
 
 input LockboxTransactionUpdateManyWithoutLockboxInput {
@@ -392,6 +438,7 @@ input LockboxTransactionUpdateManyWithWhereNestedInput {
 
 input LockboxTransactionUpdateWithoutLockboxDataInput {
   amount: Float
+  transactionType: String
 }
 
 input LockboxTransactionUpdateWithWhereUniqueWithoutLockboxInput {
@@ -476,6 +523,46 @@ input LockboxTransactionWhereInput {
 
   """All values greater than or equal the given value."""
   amount_gte: Float
+  transactionType: String
+
+  """All values that are not equal to given value."""
+  transactionType_not: String
+
+  """All values that are contained in given list."""
+  transactionType_in: [String!]
+
+  """All values that are not contained in given list."""
+  transactionType_not_in: [String!]
+
+  """All values less than the given value."""
+  transactionType_lt: String
+
+  """All values less than or equal the given value."""
+  transactionType_lte: String
+
+  """All values greater than the given value."""
+  transactionType_gt: String
+
+  """All values greater than or equal the given value."""
+  transactionType_gte: String
+
+  """All values containing the given string."""
+  transactionType_contains: String
+
+  """All values not containing the given string."""
+  transactionType_not_contains: String
+
+  """All values starting with the given string."""
+  transactionType_starts_with: String
+
+  """All values not starting with the given string."""
+  transactionType_not_starts_with: String
+
+  """All values ending with the given string."""
+  transactionType_ends_with: String
+
+  """All values not ending with the given string."""
+  transactionType_not_ends_with: String
   updatedAt: DateTime
 
   """All values that are not equal to given value."""
@@ -873,7 +960,6 @@ type Mutation {
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyLockboxes(where: LockboxWhereInput): BatchPayload!
   deleteManyLockboxTransactions(where: LockboxTransactionWhereInput): BatchPayload!
-  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -901,10 +987,6 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: String
-}
-
-enum PrismaDatabase {
-  default
 }
 
 type Query {

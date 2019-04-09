@@ -86,13 +86,12 @@ const Mutation = {
     return lockbox;
   },
   async createLockboxTransaction(parent, args, { prisma }, info) {
-    console.log(args);
     const [lockbox] = await prisma.query.lockboxes({
       where: {
         box: args.data.lockbox
       }
     });
-    if (args.transaction === 'DEPOSIT') {
+    if (args.data.transactionType[0] === 'DEPOSIT') {
       await prisma.mutation.updateLockbox({
         where: {
           id: lockbox.id
@@ -122,7 +121,8 @@ const Mutation = {
           connect: {
             id: lockbox.id
           }
-        }
+        },
+        transactionType: args.data.transactionType[0]
       }
     });
   }
