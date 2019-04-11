@@ -3878,7 +3878,7 @@ __webpack_require__.r(__webpack_exports__);
 var _jsxFileName = "/Users/Roa/Desktop/project-lockbox/frontend/components/TransactionList.js";
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_5__["default"])(["\n  query TRANSACTION_QUERY {\n    transactions {\n      amount\n      lockbox {\n        box\n        branch\n      }\n      transactionType\n    }\n  }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_5__["default"])(["\n  query TRANSACTION_QUERY {\n    transactions {\n      id\n      amount\n      lockbox {\n        box\n        branch\n      }\n      transactionType\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -3892,6 +3892,10 @@ function _templateObject() {
 
 
 var TRANSACTION_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_8___default()(_templateObject());
+var TableStyle = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].div.withConfig({
+  displayName: "TransactionList__TableStyle",
+  componentId: "s1179q-0"
+})([".table-container{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}table{width:800px;border-collapse:collapse;overflow:hidden;box-shadow:0 0 20px rgba(0,0,0,0.1);}th,td{padding:15px;}th{text-align:left;}thead{th{background-color:#f9faf5;}}tbody{tr{&:hover{background-color:rgba(111,119,239,0.3);}}td{position:relative;&:hover{&:before{content:'';position:absolute;left:0;right:0;top:-9999px;bottom:-9999px;background-color:rgba(111,119,239,0.2);z-index:-1;}}}}"]);
 
 var TransactionList =
 /*#__PURE__*/
@@ -3911,7 +3915,7 @@ function (_Component) {
         query: TRANSACTION_QUERY,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 22
+          lineNumber: 76
         },
         __self: this
       }, function (_ref) {
@@ -3921,80 +3925,94 @@ function (_Component) {
         if (loading) return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 24
+            lineNumber: 78
           },
           __self: this
         }, "Loading...");
         if (error) return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 25
+            lineNumber: 79
           },
           __self: this
         }, error);
-        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(TableStyle, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 27
+            lineNumber: 81
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("table", {
+          className: "table-container",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 82
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("thead", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 83
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("tr", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 29
+            lineNumber: 84
           },
           __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
+        }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("th", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 30
+            lineNumber: 85
           },
           __self: this
-        }, "Lockbox"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
+        }, "Lockbox"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("th", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 31
+            lineNumber: 86
           },
           __self: this
-        }, "Transaction"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
+        }, "Transaction"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("th", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 32
+            lineNumber: 87
           },
           __self: this
-        }, "Amount")), transactions.map(function (transaction) {
+        }, "Amount"))), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("tbody", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 90
+          },
+          __self: this
+        }, transactions.map(function (transaction) {
           return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("tr", {
+            key: transaction.id,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 35
+              lineNumber: 92
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 36
+              lineNumber: 93
             },
             __self: this
           }, transaction.lockbox.box), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 37
+              lineNumber: 94
             },
             __self: this
           }, transaction.transactionType), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 38
+              lineNumber: 95
             },
             __self: this
           }, transaction.amount));
-        })));
+        }))));
       });
     }
   }]);
@@ -20084,16 +20102,10 @@ var Transactions = function Transactions() {
       lineNumber: 4
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_TransactionList__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 5
-    },
-    __self: this
-  }, "hi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_TransactionList__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 6
     },
     __self: this
   }));
