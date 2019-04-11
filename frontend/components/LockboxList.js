@@ -16,7 +16,6 @@ const LockboxUl = styled.ul`
   grid-gap: 4rem;
   border: black;
   grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
-  box-shadow: 5px 10px 0 rgba(248, 243, 240);
 `;
 
 class LockboxList extends Component {
@@ -26,10 +25,9 @@ class LockboxList extends Component {
         {({ data: { lockboxes }, loading, error }) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>{error}</p>;
-          console.log(lockboxes);
           return (
             <div>
-              <h2>There are {lockboxes.length} transactions</h2>
+              <h2>There are {lockboxes.length} lockboxes</h2>
               <LockboxUl>
                 {lockboxes.map(lockbox => (
                   <div>
