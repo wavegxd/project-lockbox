@@ -8,6 +8,7 @@ const LOCKBOX_QUERY = gql`
     lockboxes {
       id
       box
+      amount
     }
   }
 `;
@@ -27,12 +28,12 @@ class LockboxList extends Component {
           if (error) return <p>{error}</p>;
           return (
             <div>
-              <h2>There are {lockboxes.length} lockboxes</h2>
               <LockboxUl>
                 {lockboxes.map(lockbox => (
                   <div>
                     <p>ID: {lockbox.id}</p>
                     <p>BOX: {lockbox.box}</p>
+                    <p>AMOUNT: {lockbox.amount}</p>
                   </div>
                 ))}
               </LockboxUl>
