@@ -20,4 +20,4 @@ Prisma does not provide logice to reada or write to the database, so this server
 
 Developmental database is hosted locally in a Docker container.
 
-Production database is deployed on heroku but kept private because of clients' wishes.
+Production database is deployed on heroku but kept private because of clients' privacy.
