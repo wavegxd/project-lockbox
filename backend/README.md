@@ -6,11 +6,11 @@
 
 ---
 
-#### Schema currently includes:
+#### App currently supports:
 
 - User Authentication with JWT / bcrypt.js
-- Lockbox information
-- Transaction information
+- Lockbox create / read / update / delete
+- Transaction create / read / update / delete
 
 ---
 
