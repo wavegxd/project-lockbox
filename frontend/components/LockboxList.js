@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import styled from 'styled-components';
+import TableStyle from './styles/TableStyle';
 
 const LOCKBOX_QUERY = gql`
   query LOCKBOX_QUERY {
@@ -9,14 +9,9 @@ const LOCKBOX_QUERY = gql`
       id
       box
       amount
+      branch
     }
   }
-`;
-const LockboxUl = styled.ul`
-  display: grid;
-  grid-gap: 4rem;
-  border: black;
-  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
 `;
 
 class LockboxList extends Component {
@@ -27,17 +22,26 @@ class LockboxList extends Component {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>{error}</p>;
           return (
-            <div>
-              <LockboxUl>
-                {lockboxes.map(lockbox => (
-                  <div>
-                    <p>ID: {lockbox.id}</p>
-                    <p>BOX: {lockbox.box}</p>
-                    <p>AMOUNT: {lockbox.amount}</p>
-                  </div>
-                ))}
-              </LockboxUl>
-            </div>
+            <TableStyle>
+              <table className="table-container">
+                <thead>
+                  <tr>
+                    <th>BRANCH</th>
+                    <th>BOX</th>
+                    <th>AMOUNT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lockboxes.map(lockbox => (
+                    <tr key={lockbox.id}>
+                      <td>{lockbox.branch}</td>
+                      <td>{lockbox.box}</td>
+                      <td>${lockbox.amount}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </TableStyle>
           );
         }}
       </Query>

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -114,8 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! styled-components */ "styled-components");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _styles_TableStyle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./styles/TableStyle */ "./components/styles/TableStyle.js");
 
 
 
@@ -139,10 +138,6 @@ function _templateObject() {
 
 
 var TRANSACTION_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_8___default()(_templateObject());
-var TableStyle = styled_components__WEBPACK_IMPORTED_MODULE_9___default.a.div.withConfig({
-  displayName: "TransactionList__TableStyle",
-  componentId: "s1179q-0"
-})([".table-container{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}table{width:800px;border-collapse:collapse;overflow:hidden;box-shadow:0 0 20px rgba(0,0,0,0.1);}th,td{padding:15px;}th{text-align:left;}thead{th{background-color:#f9faf5;}}tbody{tr{&:hover{background-color:rgba(111,119,239,0.3);}}td{position:relative;&:hover{&:before{content:'';position:absolute;left:0;right:0;top:-9999px;bottom:-9999px;background-color:rgba(111,119,239,0.2);z-index:-1;}}}}"]);
 
 var TransactionList =
 /*#__PURE__*/
@@ -162,7 +157,7 @@ function (_Component) {
         query: TRANSACTION_QUERY,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 76
+          lineNumber: 23
         },
         __self: this
       }, function (_ref) {
@@ -172,64 +167,64 @@ function (_Component) {
         if (loading) return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 78
+            lineNumber: 25
           },
           __self: this
         }, "Loading...");
         if (error) return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 79
+            lineNumber: 26
           },
           __self: this
         }, error);
-        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(TableStyle, {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_styles_TableStyle__WEBPACK_IMPORTED_MODULE_9__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 81
+            lineNumber: 28
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("table", {
           className: "table-container",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 82
+            lineNumber: 29
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("thead", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 30
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("tr", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 84
+            lineNumber: 31
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("th", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 85
+            lineNumber: 32
           },
           __self: this
         }, "Lockbox"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("th", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 86
+            lineNumber: 33
           },
           __self: this
         }, "Transaction"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("th", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 87
+            lineNumber: 34
           },
           __self: this
         }, "Amount"))), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("tbody", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 90
+            lineNumber: 37
           },
           __self: this
         }, transactions.map(function (transaction) {
@@ -237,25 +232,25 @@ function (_Component) {
             key: transaction.id,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 92
+              lineNumber: 39
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 93
+              lineNumber: 40
             },
             __self: this
           }, transaction.lockbox.box), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 94
+              lineNumber: 41
             },
             __self: this
           }, transaction.transactionType), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 95
+              lineNumber: 42
             },
             __self: this
           }, transaction.amount));
@@ -268,6 +263,26 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_6__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (TransactionList);
+
+/***/ }),
+
+/***/ "./components/styles/TableStyle.js":
+/*!*****************************************!*\
+  !*** ./components/styles/TableStyle.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_0__);
+
+var TableStyle = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConfig({
+  displayName: "TableStyle",
+  componentId: "trj40d-0"
+})([".table-container{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}table{width:800px;border-collapse:collapse;overflow:hidden;box-shadow:0 0 20px rgba(0,0,0,0.1);}th,td{padding:15px;}th{text-align:left;}thead{th{background-color:#f9faf5;}}tbody{tr{&:hover{background-color:rgba(111,119,239,0.3);}}td{position:relative;&:hover{&:before{content:'';position:absolute;left:0;right:0;top:-9999px;bottom:-9999px;background-color:rgba(111,119,239,0.2);z-index:-1;}}}}"]);
+/* harmony default export */ __webpack_exports__["default"] = (TableStyle);
 
 /***/ }),
 
@@ -636,7 +651,7 @@ var Transactions = function Transactions() {
 
 /***/ }),
 
-/***/ 3:
+/***/ 6:
 /*!*************************************!*\
   !*** multi ./pages/transactions.js ***!
   \*************************************/
