@@ -1,8 +1,8 @@
-import Meta from '../components/Meta';
+import Nav from '../components/Nav';
 
 const Index = () => (
   <div>
-    <Meta />
+    <Nav />
     <p>Hello Next.js</p>
   </div>
 );
